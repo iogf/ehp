@@ -1,0 +1,4 @@
+include COPYING
+recursive-include sample *
+recursive-include doc *
+
