@@ -36,11 +36,11 @@ A simple example.
     print dom
     
 Output.
-
+    {{#escape}} 
     <p >
     This is a paragraph.
     </p>
-    
+    {{#escape}}     
 
 Walking through the dom and changing html tag attributes.
     from ehp import *
@@ -73,9 +73,10 @@ Walking through the dom and changing html tag attributes.
     
 
 Output.
+    {{#escape}} 
     <font color="blue" size="+3" > <p > It is simple.</p> </font> 
     <font color="red" size="+1" > <p > It is powerful</p></font>
-    
+    {{#escape}}     
 
 Add new html tags to the DOM structure.
 This example inserts text between the tags <em> </em>
@@ -98,10 +99,11 @@ This example inserts text between the tags <em> </em>
     
 
 Output.
-
-    <body > <em > It is cool</em> </body>
+    {{#escape}} 
     
-
+    <body > <em > It is cool</em> </body>
+    {{#escape}}     
+    
 How to add new html tags to the dom.
     from ehp import *
     
@@ -133,9 +135,9 @@ How to add new html tags to the dom.
     print dom
     
 Output.
-
+    {{#escape}} 
     <body >  <p >foo</p></body>
-    
+    {{#escape}}     
 
 Anoter example with tag attributes.
     from ehp import *
@@ -154,8 +156,9 @@ Anoter example with tag attributes.
     print dom
     
 Output.
+    {{#escape}} 
     <body ><em > foo  </em><font color="red" ></font></body>
-    
+    {{#escape}}     
 
 Searching for tags.
     from ehp import *
@@ -172,7 +175,9 @@ Searching for tags.
 
 
 Output.
+    {{#escape}} 
     Hello world.
+    {{#escape}} 
 
 Other more complicated example.
     from ehp import *
@@ -199,6 +204,7 @@ Other more complicated example.
     print item
     
 Output.
+    {{#escape}} 
      It is a python. 
        Hello world. 
        Hello world.   
@@ -208,7 +214,7 @@ Output.
        <body  <em  Hello world. </em  
               <em style="color:blue"  It is a python. </em </body
      <em style="color:blue"  It is a python. </em
-     
+    {{#escape}}      
     
 
 Other useful method find_with_root
@@ -223,7 +229,9 @@ Other useful method find_with_root
     print dom
     
 Output.
+    {{#escape}} 
     <body >   </body>
+    {{#escape}} 
 
 Delete tag attributes.
     from ehp import *
@@ -241,8 +249,9 @@ Delete tag attributes.
     print dom
     
 Output.
+    {{#escape}} 
     <body style="color:black" > <p > xxx </p> <p > mmm </p></body>
-
+    {{#escape}} 
 
 Going through tags that match some attribute condition.
 
@@ -266,8 +275,9 @@ Going through tags that match some attribute condition.
     
 
 Output.
+    {{#escape}} 
     It is a python.
-
+    {{#escape}} 
 
 Some times you will need to insert tags after a given tag.
 
@@ -291,12 +301,13 @@ Some times you will need to insert tags after a given tag.
     print tree
     
 Output.
+    {{#escape}} 
     <html >
         <body >
             <em > alpha </em><em ></em>
         </body>
     </html>
-
+    {{#escape}} 
 
 Matching ampersand.
 
@@ -315,9 +326,10 @@ Matching ampersand.
     
 
 Output.
-
+    {{#escape}} 
     <tag > The ampersand is a good ampersand symbol. </tag>
-    
+    {{#escape}}     
+
 There are other methods defined in the classes, for documentation use help(Html)
 help(Tag) etc.
 
