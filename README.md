@@ -43,6 +43,7 @@ A simple example.
     
 
 Walking through the dom and changing html tag attributes.
+
     from ehp import *
     
     data = '''
@@ -101,6 +102,7 @@ This example inserts text between the tags <em> </em>
     <body > <em > It is cool</em> </body>
     
 How to add new html tags to the dom.
+
     from ehp import *
     
     html = Html()
@@ -134,6 +136,7 @@ How to add new html tags to the dom.
     <body >  <p >foo</p></body>
 
 Anoter example with tag attributes.
+
     from ehp import *
     
     data  = ''' <body><em> foo  </em></body>'''
@@ -153,6 +156,7 @@ Anoter example with tag attributes.
     <body ><em > foo  </em><font color="red" ></font></body>
 
 Searching for tags.
+
     from ehp import *
     
     data = '''<html> <body> <em> Hello world. </em> </body> </html>'''
@@ -170,6 +174,7 @@ Searching for tags.
     Hello world.
 
 Other more complicated example.
+
     from ehp import *
     
     
@@ -206,6 +211,7 @@ Other more complicated example.
     
 
 Other useful method find_with_root
+
     from ehp import *
     
     html = Html()
@@ -220,6 +226,7 @@ Other useful method find_with_root
     <body >   </body>
 
 Delete tag attributes.
+
     from ehp import *
     
     html = Html()
