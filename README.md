@@ -36,11 +36,13 @@ A simple example.
     print dom
     
 Output.
-    {{#escape}} 
+{{#escape}} 
+
     <p >
     This is a paragraph.
     </p>
-    {{#escape}}     
+    
+{{#escape}}     
 
 Walking through the dom and changing html tag attributes.
     from ehp import *
