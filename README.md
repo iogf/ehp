@@ -216,10 +216,8 @@ Other useful method find_with_root
     
     print dom
     
-Output.
-    {{#escape}} 
+    Output.
     <body >   </body>
-    {{#escape}} 
 
 Delete tag attributes.
     from ehp import *
@@ -236,10 +234,8 @@ Delete tag attributes.
     
     print dom
     
-Output.
-    {{#escape}} 
+    Output.
     <body style="color:black" > <p > xxx </p> <p > mmm </p></body>
-    {{#escape}} 
 
 Going through tags that match some attribute condition.
 
@@ -262,10 +258,8 @@ Going through tags that match some attribute condition.
         print ind.text()
     
 
-Output.
-    {{#escape}} 
+    Output.
     It is a python.
-    {{#escape}} 
 
 Some times you will need to insert tags after a given tag.
 
@@ -288,14 +282,12 @@ Some times you will need to insert tags after a given tag.
     
     print tree
     
-Output.
-    {{#escape}} 
+    Output.
     <html >
         <body >
             <em > alpha </em><em ></em>
         </body>
     </html>
-    {{#escape}} 
 
 Matching ampersand.
 
@@ -313,10 +305,8 @@ Matching ampersand.
     print dom
     
 
-Output.
-    {{#escape}} 
+    Output.
     <tag > The ampersand is a good ampersand symbol. </tag>
-    {{#escape}}     
 
 There are other methods defined in the classes, for documentation use help(Html)
 help(Tag) etc.
