@@ -20,6 +20,7 @@ Examples
 ========
 A simple example.
 
+~~~python
     from ehp import *
     
     # The parser class.
@@ -40,10 +41,11 @@ A simple example.
     <p >
     This is a paragraph.
     </p>
-    
+~~~    
 
 Walking through the dom and changing html tag attributes.
 
+~~~python
     from ehp import *
     
     data = '''
@@ -76,10 +78,12 @@ Walking through the dom and changing html tag attributes.
     Output.
     <font color="blue" size="+3" > <p > It is simple.</p> </font> 
     <font color="red" size="+1" > <p > It is powerful</p></font>
+~~~
 
 Add new html tags to the DOM structure.
 This example inserts text between the tags <em> </em>
 
+~~~python
     data  = '''<body> <em> </em> </body>'''
     html = Html()
     dom = html.feed(data)
@@ -100,9 +104,11 @@ This example inserts text between the tags <em> </em>
     Output.
     
     <body > <em > It is cool</em> </body>
+~~~
     
 How to add new html tags to the dom.
 
+~~~python
     from ehp import *
     
     html = Html()
@@ -134,9 +140,12 @@ How to add new html tags to the dom.
     
     Output.
     <body >  <p >foo</p></body>
+~~~
 
 Anoter example with tag attributes.
 
+
+~~~python
     from ehp import *
     
     data  = ''' <body><em> foo  </em></body>'''
@@ -154,9 +163,11 @@ Anoter example with tag attributes.
     
     Output.
     <body ><em > foo  </em><font color="red" ></font></body>
+~~~
 
 Searching for tags.
 
+~~~python
     from ehp import *
     
     data = '''<html> <body> <em> Hello world. </em> </body> </html>'''
@@ -172,9 +183,11 @@ Searching for tags.
 
     Output.
     Hello world.
+~~~
 
 Other more complicated example.
 
+~~~python
     from ehp import *
     
     
@@ -208,10 +221,11 @@ Other more complicated example.
        <body  <em  Hello world. </em  
               <em style="color:blue"  It is a python. </em </body
      <em style="color:blue"  It is a python. </em
-    
+~~~    
 
 Other useful method find_with_root
 
+~~~python
     from ehp import *
     
     html = Html()
@@ -224,9 +238,11 @@ Other useful method find_with_root
     
     Output.
     <body >   </body>
+~~~
 
 Delete tag attributes.
 
+~~~python
     from ehp import *
     
     html = Html()
@@ -243,9 +259,11 @@ Delete tag attributes.
     
     Output.
     <body style="color:black" > <p > xxx </p> <p > mmm </p></body>
+~~~
 
 Going through tags that match some attribute condition.
 
+~~~python
     from ehp import *
     
     data = '''<html> <body> 
@@ -264,12 +282,16 @@ Going through tags that match some attribute condition.
         # It shouldn't be printed.
         print ind.text()
     
-
+    """
     Output.
     It is a python.
+    """
+
+~~~
 
 Some times you will need to insert tags after a given tag.
 
+~~~python
     from ehp import *
     doc = Html()
     
@@ -288,16 +310,20 @@ Some times you will need to insert tags after a given tag.
             root.insert_after(ind, x)
     
     print tree
-    
+
+    """    
     Output.
     <html >
         <body >
             <em > alpha </em><em ></em>
         </body>
     </html>
+    """
+~~~
 
 Matching ampersand.
 
+~~~python
     from ehp import *
     
     html = Html()
@@ -314,6 +340,7 @@ Matching ampersand.
 
     Output.
     <tag > The ampersand is a good ampersand symbol. </tag>
+~~~
 
 There are other methods defined in the classes, for documentation use help(Html)
 help(Tag) etc.
@@ -330,7 +357,5 @@ ioliveira@id.uff.br
 I'm on facebook too.
 https://www.facebook.com/iury.gomes.figueiredo
 
-Old repository
-==============
-git clone ssh://olliveira@git.code.sf.net/p/easyhtmlparser/code easyhtmlparser-code
+
 
