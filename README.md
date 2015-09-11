@@ -36,11 +36,13 @@ A simple example.
     dom = html.feed(data)
     print dom
     
+    """
     Output.
-
+    
     <p >
     This is a paragraph.
     </p>
+    """
 ~~~    
 
 Walking through the dom and changing html tag attributes.
@@ -75,9 +77,11 @@ Walking through the dom and changing html tag attributes.
     print dom
     
 
+    """
     Output.
     <font color="blue" size="+3" > <p > It is simple.</p> </font> 
     <font color="red" size="+1" > <p > It is powerful</p></font>
+    """
 ~~~
 
 Add new html tags to the DOM structure.
@@ -101,9 +105,11 @@ This example inserts text between the tags <em> </em>
     print dom
     
 
+    """
     Output.
     
     <body > <em > It is cool</em> </body>
+    """
 ~~~
     
 How to add new html tags to the dom.
@@ -138,8 +144,10 @@ How to add new html tags to the dom.
     
     print dom
     
+    """
     Output.
     <body >  <p >foo</p></body>
+    """
 ~~~
 
 Anoter example with tag attributes.
@@ -161,8 +169,10 @@ Anoter example with tag attributes.
     
     print dom
     
+    """
     Output.
     <body ><em > foo  </em><font color="red" ></font></body>
+    """
 ~~~
 
 Searching for tags.
@@ -181,8 +191,10 @@ Searching for tags.
         print ind.text()
 
 
+    """
     Output.
     Hello world.
+    """
 ~~~
 
 Other more complicated example.
@@ -211,6 +223,7 @@ Other more complicated example.
     print root
     print item
     
+    """
     Output.
      It is a python. 
        Hello world. 
@@ -221,6 +234,7 @@ Other more complicated example.
        <body  <em  Hello world. </em  
               <em style="color:blue"  It is a python. </em </body
      <em style="color:blue"  It is a python. </em
+    """
 ~~~    
 
 Other useful method find_with_root
@@ -236,8 +250,10 @@ Other useful method find_with_root
     
     print dom
     
+    """
     Output.
     <body >   </body>
+    """
 ~~~
 
 Delete tag attributes.
@@ -257,8 +273,10 @@ Delete tag attributes.
     
     print dom
     
+    """
     Output.
     <body style="color:black" > <p > xxx </p> <p > mmm </p></body>
+    """
 ~~~
 
 Going through tags that match some attribute condition.
@@ -338,8 +356,10 @@ Matching ampersand.
     print dom
     
 
+    """
     Output.
     <tag > The ampersand is a good ampersand symbol. </tag>
+    """
 ~~~
 
 There are other methods defined in the classes, for documentation use help(Html)
