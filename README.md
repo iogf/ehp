@@ -177,6 +177,7 @@ raw data inside html elements by instantiating the class Data with data.
 <tag > The &amp is a good &amp symbol. </tag>
 ~~~
 
+For a more detailed description of the classes and methods, inspect the docs of the module ehp.
 Help
 ====
 
@@ -185,5 +186,6 @@ channel #vy.
 
 You can contact me through email as well.
 ioliveira@id.uff.br
+
 
 
