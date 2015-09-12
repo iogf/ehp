@@ -1,17 +1,15 @@
 from ehp import *
 
 data  = ''' <body><em> foo  </em></body>'''
-html  = Html()
-dom  = html.feed(data)
+html  = Html().feed(data)
 
+for ind, name, attr in dom.walk():
+    if not name == 'body': continue
+    x = Tag('font', {'color':'red'})
+    ind.append(x)
 
-for ind in dom.sail():
-    if ind.name == 'body':
-        x = Tag('font', {'color':'red'})
-        ind.append(x)
+print dom
 
-
-print str(dom)
 
 
 

@@ -1,4 +1,3 @@
-# Name: ex3.py
 from ehp import *
 
 
@@ -12,6 +11,7 @@ for ind, name, attr in dom.walk():
         ind.append(x)
 
 print str(dom)
+
 
 
 

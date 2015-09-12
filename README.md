@@ -1,11 +1,9 @@
 ehp
 ===
 
-Easy Html Parser is an AST generator for html/xml documents. You can easily delete/insert/extract tags in html/xml documents as well as look for patterns.
-
-Easy html parser EHP is a nice tool to parse html content. 
-It has a short learning curve. It builds a DOM representation for html documents,
-the DOM classes have powerful methods to insert, delete and change html attributes.
+Easy Html Parser is an AST generator for html/xml documents. EHP is a nice tool to parse html content.  
+It has a short learning curve compared to other parsers. You don't need to lose time going through massive 
+documentation to do simple stuff. EHP handles broken html nicely.
 
 EHP has a short learning curve, you can go through some examples, in a few minutes
 you can implement cool stuff.
@@ -16,366 +14,176 @@ Install
     
 That is all.
 
-Examples
-========
-A simple example.
+A simple example
+=================
 
 ~~~python
-    from ehp import *
-    
-    # The parser class.
-    html = Html()
-    
-    data = '''
-    <p>
-    This is a paragraph.
-    </p>
-    '''
-    
-    # The feed method builds a DOM structure for the html document.
-    dom = html.feed(data)
-    print dom
-    
-    """
-    Output.
-    
-    <p >
-    This is a paragraph.
-    </p>
-    """
+from ehp import *
+
+data = '''<html><body> <font size="+3" > <p> It is simple.</p> 
+</font> </body></html>'''
+
+dom = Html().feed(data)
+
+for ind, name, attr in dom.walk():
+    if not name == 'font': continue
+    attr['size']  = '+2'
+    attr['color'] = 'red'
+
+print dom
 ~~~    
 
-Walking through the dom and changing html tag attributes.
-
-~~~python
-    from ehp import *
-    
-    data = '''
-    <font size="+3" > <p> It is simple.</p> </font> 
-    <font size="+1" > <p> It is powerful</p></font>'''
-    
-    # The parser class.
-    html = Html()
-
-    # The DOM structure.
-    dom = html.feed(data)
-    
-    for ind, name, attr in dom.walk():
-        # If the tag name is font we then check their
-        # attributes.
-
-        if name == 'font':
-            if attr['size'] == '+1':    
-                # If size matches the condition 
-                # then we add a new attribute.
-        
-                attr['color'] = 'red'
-            elif attr['size'] == '+3':  
-
-                attr['color'] = 'blue'
-    
-    print dom
-    
-
-    """
-    Output.
-    <font color="blue" size="+3" > <p > It is simple.</p> </font> 
-    <font color="red" size="+1" > <p > It is powerful</p></font>
-    """
-~~~
-
-Add new html tags to the DOM structure.
-This example inserts text between the tags <em> </em>
-
-~~~python
-    data  = '''<body> <em> </em> </body>'''
-    html = Html()
-    dom = html.feed(data)
-    
-    for ind, name, attr in dom.walk():
-        if  name == 'em': 
-            # The Data class represents
-            # the text inside the tags.
-
-            x = Data('It is cool')
-
-            # It appends x to em text.
-            ind.append(x)
-    
-    print dom
-    
-
-    """
-    Output.
-    
-    <body > <em > It is cool</em> </body>
-    """
-~~~
-    
-How to add new html tags to the dom.
-
-~~~python
-    from ehp import *
-    
-    html = Html()
-    
-    data = '''
-    <body> <em> foo </em> </body>
-    '''
-    
-    dom = html.feed(data)
-    
-    # The method sail_with_root
-    # walks through the dom and gives you
-    # the root tag for the tag in item.
-    #
-    # This is specially useful when you want
-    # to delete/insert tags based on conditions.
-
-    for root, item in dom.sail_with_root():
-        # If it is an em tag then substitute it for
-        # a paragraph tag.
-
-        if item.name == 'em':
-            root.remove(item)
-            x = Tag('p')
-            x.append(Data('foo'))
-            root.append(x)
-    
-    print dom
-    
-    """
-    Output.
-    <body >  <p >foo</p></body>
-    """
-~~~
-
-Anoter example with tag attributes.
-
-
-~~~python
-    from ehp import *
-    
-    data  = ''' <body><em> foo  </em></body>'''
-    html  = Html()
-    dom  = html.feed(data)
-    
-    
-    for ind in dom.sail():
-        if ind.name == 'body':
-            x = Tag('font', {'color':'red'})
-            ind.append(x)
-    
-    
-    print dom
-    
-    """
-    Output.
-    <body ><em > foo  </em><font color="red" ></font></body>
-    """
-~~~
-
-Searching for tags.
-
-~~~python
-    from ehp import *
-    
-    data = '''<html> <body> <em> Hello world. </em> </body> </html>'''
-    
-    html = Html()
-    dom = html.feed(data)
-    
-    # The find method goes through all em tags.
-    # The text method just prints the text inside a given tag.
-    for ind in dom.find('em'):
-        print ind.text()
-
-
-    """
-    Output.
-    Hello world.
-    """
-~~~
-
-Other more complicated example.
-
-~~~python
-    from ehp import *
-    
-    
-    data = '''<html> <body> <em> Hello world. </em>  
-              <em style="color:blue"> It is a python. </em> </body> </html>'''
-    
-    html = Html()
-    dom = html.feed(data)
-    
-    for ind in dom.find('em'):
-        print ind.text()
-    
-    # The first ocurrence of 'em'.
-    print dom.fst('em').text()
-    print dom.fst('body').text()
-    print dom.fst('html').text()
-    
-    # This method returns the first ocurrence of a given tag
-    # matching some attributes.
-    root, item = dom.take_with_root(('style', 'color:blue'))
-    print root
-    print item
-    
-    """
-    Output.
-     It is a python. 
-       Hello world. 
-       Hello world.   
-               It is a python.  
-        Hello world.   
-               It is a python.   
-       <body  <em  Hello world. </em  
-              <em style="color:blue"  It is a python. </em </body
-     <em style="color:blue"  It is a python. </em
-    """
-~~~    
-
-Other useful method find_with_root
-
-~~~python
-    from ehp import *
-    
-    html = Html()
-    dom = html.feed('''<body> <p> alpha </p> <p> beta </p> </body>''')
-    
-    for root, ind in dom.find_with_root('p'):
-        root.remove(ind)
-    
-    print dom
-    
-    """
-    Output.
-    <body >   </body>
-    """
-~~~
-
-Delete tag attributes.
-
-~~~python
-    from ehp import *
-    
-    html = Html()
-    dom  = html.feed('''<body> <p style="color:black"> xxx </p> 
-                     <p style = "color:black"> mmm </p></body>''')
-    
-    for root, ind in dom.match_with_root(('style', 'color:black')):
-        del ind.attr['style']
-    
-    item = dom.fst('body')
-    item.attr['style'] = 'color:black'
-    
-    print dom
-    
-    """
-    Output.
-    <body style="color:black" > <p > xxx </p> <p > mmm </p></body>
-    """
-~~~
-
-Going through tags that match some attribute condition.
-
-~~~python
-    from ehp import *
-    
-    data = '''<html> <body> 
-              <em style="background:blue"> It is a python. </em> 
-              </body> </html>'''
-    
-    html = Html()
-    dom = html.feed(data)
-    
-    for ind in dom.match(('style', 'background:blue')):
-        print ind.text()
-    
-    
-    for ind in dom.match(('style', 'background:blue'),
-                          ('onclick', 'foo();')):
-        # It shouldn't be printed.
-        print ind.text()
-    
-    """
-    Output.
-    It is a python.
-    """
+**Output:**
 
 ~~~
-
-Some times you will need to insert tags after a given tag.
-
-~~~python
-    from ehp import *
-    doc = Html()
-    
-    tree = doc.feed(''' <html>
-                            <body>
-                                <em> alpha </em>
-                            </body>
-                        </html>
-                    ''')
-    
-    for root, ind in tree.sail_with_root():
-        if ind.name == 'em':
-            x = Tag('em')
-
-            # You have an insert_before method too.
-            root.insert_after(ind, x)
-    
-    print tree
-
-    """    
-    Output.
-    <html >
-        <body >
-            <em > alpha </em><em ></em>
-        </body>
-    </html>
-    """
+<html ><body > <font color="red" size="+2" > <p > It is simple.</p> 
+</font> </body></html>
 ~~~
 
-Matching ampersand.
+The Html class is responsible by parsing html content. The Html.feed method returns a DOM representation 
+of the html document. The html elements are represented by classes whose methods permit to manipulate such
+elements, changing their attributes, adding new elements, removing elements. 
 
 ~~~python
-    from ehp import *
-    
-    html = Html()
-    data = '''<tag> The &amp; is a good &amp; symbol. </tag>'''
-    dom = html.feed(data)
-    
-    for root, ind in dom.find_with_root(AMP):
-        if ind.name == AMP:
-            index = root.index(ind)
-            root[index] = Data('ampersand')
-    
-    print dom
-    
-
-    """
-    Output.
-    <tag > The ampersand is a good ampersand symbol. </tag>
-    """
+class Tag(Root)
+ |  This class's instances represent xml/html tags under the form:
+ |  <name key="value" ...> ... </name>.
+ |  
+ |  It holds useful methods for parsing xml/html documents.
+.
+.
+.
 ~~~
 
-There are other methods defined in the classes, for documentation use help(Html)
-help(Tag) etc.
+The above class is responsible by representing most of the html elements. Such a class has methods
+to insert, delete, html elements. The Tag class inherits from Root that abstracts all useful characteristics
+of all html elements. It is possible to create new tags with attributes then insert them between specific
+positions as shown in the example below.
 
+~~~python
+from ehp import *
+
+data  = ''' <body><em> foo  </em></body>'''
+html  = Html().feed(data)
+
+for ind, name, attr in dom.walk():
+    if not name == 'body': continue
+    x = Tag('font', {'color':'red'})
+    ind.append(x)
+
+print dom
+~~~
+
+**Output.**
+
+~~~
+<html ><body > <font color="red" size="+2" > <p > It is simple.</p> 
+</font> <font color="red" ></font></body></html>
+~~~
+
+Most of the html elements may hold text, all classes have a method to retrieve raw data.
+The example below shows the usage of the Root.find and Root.text methods.
+
+~~~python
+from ehp import *
+
+data = '''<html> <body> <em> Hello world. </em> </body> </html>'''
+
+html = Html()
+dom = html.feed(data)
+
+for ind in dom.find('em'):
+    print ind.text()
+~~~
+
+**Output:*
+
+~~~
+ Hello world. 
+~~~
+
+The find method returns an interator whose elements's names are matching with the passed argument. The Root.find
+method is useful when it is known which element we need.
+
+It is possible to remove specific elements by using the Root.remove method. The example below shows how to use such
+a method.
+
+~~~python
+from ehp import *
+
+html = Html()
+dom = html.feed('''<body> <p> alpha </p> <p> beta </p> </body>''')
+
+for root, ind in dom.find_with_root('p'):
+    root.remove(ind)
+
+print dom
+~~~
+
+**Output:**
+
+~~~
+<body >   </body>
+~~~
+
+The method Root.find_with_root is used to iterate over the html elements while yielding their outmost elements.
+The example shown above iterates over all tags whose name match with 'p' then remove them from the outmost
+tag that is 'body'.
+
+It is possible to iterate over elements whose attributes match a given condition as follow below.
+
+~~~python
+data = '<body><a size="2"><b size="1"></b></a></body>'
+html = Html()
+dom = html.feed(data)
+
+for ind in dom.match(('size', '1')):
+    print ind
+~~~
+
+**Output:**
+
+~~~
+<b size="1" ></b>
+~~~
+
+There is a Root.match_with_root in all classes whose purpose is returning an iterator with
+html elements matching an attribute condition and their outmost tags.
+
+There are classes to abstract special html entites like the Amp, Meta, Code, Comment, Pi.
+
+~~~python
+from ehp import *
+
+html = Html()
+data = '''<tag> The &amp; is a good &amp; symbol. </tag>'''
+dom = html.feed(data)
+
+for root, ind in dom.find_with_root(AMP):
+    if not ind.name == AMP: continue
+
+    index = root.index(ind)
+    root[index] = Data('ampersand')
+
+print dom
+~~~
+
+The Root.index method is used to return the tag's index in relation to its outmost tag. It is possible to insert
+raw data inside html elements by instantiating the class Data with data.
+
+**Output:**
+
+~~~
+<tag > The &amp is a good &amp symbol. </tag>
+~~~
 
 Help
 ====
+
 If you have sugestions or need help you can find me at irc.freenode.org
 channel #vy.
 
 You can contact me through email as well.
 ioliveira@id.uff.br
-
-I'm on facebook too.
-https://www.facebook.com/iury.gomes.figueiredo
-
 
 

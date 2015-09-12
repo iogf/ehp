@@ -1,19 +1,15 @@
-# Name: ex-2.py
-
 from ehp import *
 
+data = '''<html><body> <font size="+3" > <p> It is simple.</p> 
+</font> </body></html>'''
 
-data = '''
-<font size="+3" > <p> It is simple.</p> </font> 
-<font size="+1" > <p> It is powerful</p></font>'''
-
-html = Html()
-dom = html.feed(data)
+dom = Html().feed(data)
 
 for ind, name, attr in dom.walk():
-    if name == 'font':
-        if attr['size'] == '+1':    attr['color'] = 'red'
-        elif attr['size'] == '+3':  attr['color'] = 'blue'
+    if not name == 'font': continue
+    attr['size']  = '+2'
+    attr['color'] = 'red'
 
 print dom
+
 
