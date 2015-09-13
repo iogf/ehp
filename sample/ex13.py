@@ -1,17 +1,12 @@
 from ehp import *
-doc = Html()
+data = '''<html><body><em> alpha </em></body></html>'''
+dom = Html().feed(data)
 
-tree = doc.feed(''' <html>
-                        <body>
-                            <em> alpha </em>
-                        </body>
-                    </html>
-                ''')
+for root, ind in dom.find_with_root('em'):
+    x = Tag('em')
+    x.append(Data('cool'))
+    root.insert_after(ind, x)
 
-for root, ind in tree.sail_with_root():
-    if ind.name == 'em':
-        x = Tag('em')
-        root.insert_after(ind, x)
+print dom
 
-print tree
 

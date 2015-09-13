@@ -14,8 +14,39 @@ Install
     
 That is all.
 
-A simple example
-=================
+Print the DOM object
+====================
+
+~~~python
+from ehp import *
+
+html = Html()
+
+data = '''
+<p>
+This is a paragraph.
+</p>
+'''
+
+
+dom = html.feed(data)
+print dom
+~~~    
+
+**Output:**
+
+~~~
+<p >
+This is a paragraph.
+</p>
+~~~
+
+That above example shows how to generate a tree representation for html content. The Html class is the parser class it implements
+the Html.feed method which is used to build a tree representation for html content that is passed through a string. All classes
+that map a html entity have a __str__ method.
+
+Walking through the tree
+========================
 
 ~~~python
 from ehp import *
@@ -26,50 +57,8 @@ data = '''<html><body> <font size="+3" > <p> It is simple.</p>
 dom = Html().feed(data)
 
 for ind, name, attr in dom.walk():
-    if not name == 'font': continue
     attr['size']  = '+2'
     attr['color'] = 'red'
-
-print dom
-~~~    
-
-**Output:**
-
-~~~
-<html ><body > <font color="red" size="+2" > <p > It is simple.</p> 
-</font> </body></html>
-~~~
-
-The Html class is responsible by parsing html content. The Html.feed method returns a DOM representation 
-of the html document. The html elements are represented by classes whose methods permit to manipulate such
-elements, changing their attributes, adding new elements, removing elements. 
-
-~~~python
-class Tag(Root)
- |  This class's instances represent xml/html tags under the form:
- |  <name key="value" ...> ... </name>.
- |  
- |  It holds useful methods for parsing xml/html documents.
-.
-.
-.
-~~~
-
-The above class is responsible by representing most of the html elements. Such a class has methods
-to insert, delete, html elements. The Tag class inherits from Root that abstracts all useful characteristics
-of all html elements. It is possible to create new tags with attributes then insert them between specific
-positions as shown in the example below.
-
-~~~python
-from ehp import *
-
-data  = ''' <body><em> foo  </em></body>'''
-html  = Html().feed(data)
-
-for ind, name, attr in dom.walk():
-    if not name == 'body': continue
-    x = Tag('font', {'color':'red'})
-    ind.append(x)
 
 print dom
 ~~~
@@ -77,12 +66,97 @@ print dom
 **Output.**
 
 ~~~
-<html ><body > <font color="red" size="+2" > <p > It is simple.</p> 
-</font> <font color="red" ></font></body></html>
+<html color="red" size="+2" ><body color="red" size="+2" > <font color="red" size="+2" > <p color="red" size="+2" > It is simple.</p> 
+</font> </body></html>
 ~~~
 
-Most of the html elements may hold text, all classes have a method to retrieve raw data.
-The example below shows the usage of the Root.find and Root.text methods.
+The example shows how to walk through all html entities and manipulate their attributes. The variable ind in that
+example holds the tree representation a html entity that is being visited. The variable name holds the visited html entity name
+and the attr variable holds a dictionary whose keys are html entity attributes.
+
+Find specific html entities
+============================
+
+~~~python
+from ehp import *
+
+data = '''<body> <em> </em> </body>'''
+dom  = Html().feed(data)
+
+for ind in dom.find('em'):
+    x = Data('It is cool')
+    ind.append(x)
+
+print dom
+~~~
+
+**Output:*
+
+~~~
+<body > <em > It is cool</em> </body>
+~~~
+
+This example shows how to visit html entities whose name match a given string. Notice it is possible
+to add new html entites to the html by instantiating the class Tag, XTag, Data, Amp etc.
+All objects used to represent html entities inherit from python list class so they all have
+a method list.append.
+
+Remove a specific html entity
+=============================
+
+~~~python
+from ehp import *
+
+html = Html()
+
+data = '''
+<body> <em> foo </em> </body>
+'''
+
+dom = html.feed(data)
+
+for root, item in dom.find_with_root('em'):
+    root.remove(item)
+
+print dom
+~~~
+
+**Output:**
+
+~~~
+<body >  </body>
+~~~
+
+That example shows how to use the Root.find_with_root method to match html entities with specific html types and
+how to remove them from the outmost html entity. The Root.find_with_root method returns an iterator
+holding the outmost html entity for a node being visited.
+
+Insert a new html entity
+========================
+
+~~~python
+from ehp import *
+
+data  = ''' <body><em> foo  </em></body>'''
+dom  = Html().feed(data)
+
+for ind in dom.find('em'):
+    x = Tag('font', {'color':'red'})
+    ind.append(x)
+
+print dom
+~~~
+
+**Output:**
+
+~~~
+ <body ><em > foo  <font color="red" ></font></em></body>
+~~~
+
+The example shown above examplifies how to insert a new html entity in a tree representation. 
+
+Retrieve raw data
+=================
 
 ~~~python
 from ehp import *
@@ -96,88 +170,74 @@ for ind in dom.find('em'):
     print ind.text()
 ~~~
 
-**Output:*
+**Output:**
 
 ~~~
  Hello world. 
 ~~~
 
-The find method returns an interator whose elements's names are matching with the passed argument. The Root.find
-method is useful when it is known which element we need.
+That one shows the usage of the Root.text method that is used to retrieve all raw data from html entities.
+The Root class abstracts all common methods of html entities, all classes mapping html entities inherit from Root.
 
-It is possible to remove specific elements by using the Root.remove method. The example below shows how to use such
-a method.
+Attribute based condition
+=========================
 
 ~~~python
 from ehp import *
 
-html = Html()
-dom = html.feed('''<body> <p> alpha </p> <p> beta </p> </body>''')
+data = '''<html> <body> 
+          <em style="background:blue"> It is a python. </em> 
+          <p> cool </p></body> </html>'''
 
-for root, ind in dom.find_with_root('p'):
-    root.remove(ind)
+dom = Html().feed(data)
 
-print dom
+for ind in dom.match(('style', 'background:blue')):
+    print ind.text()
+
 ~~~
 
 **Output:**
 
 ~~~
-<body >   </body>
+ It is a python. 
 ~~~
 
-The method Root.find_with_root is used to iterate over the html elements while yielding their outmost elements.
-The example shown above iterates over all tags whose name match with 'p' then remove them from the outmost
-tag that is 'body'.
+The above example shows how to visit html entities that match a given attribute condition. It is very useful
+sometimes.
 
-It is possible to iterate over elements whose attributes match a given condition as follow below.
+The Amp, Meta, Code, Comment, Pi, Data classes
+==============================================
 
 ~~~python
-data = '<body><a size="2"><b size="1"></b></a></body>'
-html = Html()
+from ehp import *
+
+html = Html().feed(data)
+data = '''<tag> The &amp; is a good &amp; symbol. </tag>'''
 dom = html.feed(data)
 
-for ind in dom.match(('size', '1')):
+for root, ind in dom.find_with_root(AMP):
     print ind
 ~~~
 
 **Output:**
 
 ~~~
-<b size="1" ></b>
+&amp
+&amp
 ~~~
 
-There is a Root.match_with_root in all classes whose purpose is returning an iterator with
-html elements matching an attribute condition and their outmost tags.
+There are special classes in EHP that represent special html elements. These classes are
+Amp, Meta, Code, Comment and Data. 
 
-There are classes to abstract special html entites like the Amp, Meta, Code, Comment, Pi.
+The AMP, DATA, META, CODE, COMMENT values are the names of such entities in EHP. 
+One would call the Root.find method with a string or with one of these values to find nodes. 
 
-~~~python
-from ehp import *
+The DATA name means it is raw data, CODE means hexadecimal numeric characters, COMMENT means html comments,  Pi means processing instructions
+like ~~~ <?proc color='red'> ~~~ , META means html doctypes.
 
-html = Html()
-data = '''<tag> The &amp; is a good &amp; symbol. </tag>'''
-dom = html.feed(data)
+There are other handy methods to manipulate a tree html representation, for help on these methods
+see the EHP built-in docs.
 
-for root, ind in dom.find_with_root(AMP):
-    if not ind.name == AMP: continue
-
-    index = root.index(ind)
-    root[index] = Data('ampersand')
-
-print dom
-~~~
-
-The Root.index method is used to return the tag's index in relation to its outmost tag. It is possible to insert
-raw data inside html elements by instantiating the class Data with data.
-
-**Output:**
-
-~~~
-<tag > The &amp is a good &amp symbol. </tag>
-~~~
-
-For a more detailed description of the classes and methods, inspect the docs of the module ehp.
 Help
 ====
 
@@ -186,6 +246,8 @@ channel #vy.
 
 You can contact me through email as well.
 ioliveira@id.uff.br
+
+
 
 
 

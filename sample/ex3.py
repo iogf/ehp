@@ -1,20 +1,10 @@
 from ehp import *
 
+data = '''<body> <em> </em> </body>'''
+dom  = Html().feed(data)
 
-data  = '''<body> <em> </em> </body>'''
-html = Html()
-dom = html.feed(data)
+for ind in dom.find('em'):
+    x = Data('It is cool')
+    ind.append(x)
 
-for ind, name, attr in dom.walk():
-    if  name == 'em': 
-        x = Data('It is cool')
-        ind.append(x)
-
-print str(dom)
-
-
-
-
-
-
-
+print dom

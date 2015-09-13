@@ -1,5 +1,3 @@
-# Name: ex1.py
-
 from ehp import *
 
 html = Html()
@@ -13,6 +11,7 @@ This is a paragraph.
 
 dom = html.feed(data)
 print dom
+
 
 
 

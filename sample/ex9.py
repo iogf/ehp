@@ -1,5 +1,3 @@
-# Name: ex9.py
-
 from ehp import *
 
 
@@ -20,5 +18,6 @@ print dom.fst('html').text()
 root, item = dom.take_with_root(('style', 'color:blue'))
 print root
 print item
+
 
 
