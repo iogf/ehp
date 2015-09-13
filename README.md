@@ -96,7 +96,7 @@ print dom
 <body > <em > It is cool</em> </body>
 ~~~
 
-This example shows how to visit html entities whose name match a given string. Notice it is possible
+This example shows how to visit html entities whose names match a given string. Notice it is possible
 to add new html entites to the html by instantiating the class Tag, XTag, Data, Amp etc.
 All objects used to represent html entities inherit from python list class so they all have
 a method list.append.
@@ -246,6 +246,7 @@ channel #vy.
 
 You can contact me through email as well.
 ioliveira@id.uff.br
+
 
 
 
