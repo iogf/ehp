@@ -38,7 +38,7 @@ class Attribute(dict):
         which are inside self.
         """
 
-        data = str()
+        data = ''
         for key, value in self.items():
             pair = '%s="%s" ' % (key, value)
             data = data + pair
@@ -81,7 +81,7 @@ class Root(list):
         html = ''
 
         for ind in self:
-            html = html + str(ind)
+            html = html + ind
 
         return html
 
@@ -413,7 +413,7 @@ class Root(list):
 
         for ind in self.sail():
             if ind.name in args:
-                data = '%s%s%s' % (data, delim, str(ind))
+                data = '%s%s%s' % (data, delim, ind)
 
         return data
 
@@ -544,7 +544,7 @@ class Root(list):
         """
 
         fd = open(filename, 'w')
-        fd.write(str(self))
+        fd.write(self)
         fd.close()
 
 
@@ -670,7 +670,7 @@ class Tag(Root):
    
 
         for ind in self:
-            html = html + str(ind)
+            html = html + ind
 
         html = html + '</%s>' % self.name
 
@@ -1076,6 +1076,7 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
+
 
 
 
