@@ -81,7 +81,7 @@ class Root(list):
         html = ''
 
         for ind in self:
-            html = html + ind
+            html = '%s%s' % (html, ind)
 
         return html
 
@@ -670,7 +670,7 @@ class Tag(Root):
    
 
         for ind in self:
-            html = html + ind
+            html = '%s%s' % (html, ind)
 
         html = html + '</%s>' % self.name
 
@@ -1076,6 +1076,7 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
+
 
 
 
