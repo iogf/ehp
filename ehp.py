@@ -736,6 +736,8 @@ class Data(Root):
 
         return self.data
 
+    def text(self):
+        return self.data
 
 class XTag(Root):
     """ 
@@ -1076,6 +1078,8 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
+
+
 
 
 
