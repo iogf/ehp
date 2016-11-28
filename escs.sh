@@ -25,3 +25,16 @@ sudo bash -i
 python setup.py install
 rm -fr build
 exit
+##############################################################################
+# ehp, pip.
+cd ~/projects/ehp-code
+
+echo '
+[metadata]
+description-file = README.md
+' > setup.cfg
+
+vy setup.cfg
+python setup.py sdist register upload
+rm -fr sdist
+
