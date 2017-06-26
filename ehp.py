@@ -535,7 +535,7 @@ class Root(list):
         for that node.
         """
 
-        return self.join('', DATA)
+        return self.join('', DATA, AMP, CODE)
 
 
     def write(self, filename):
@@ -1078,6 +1078,7 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
+
 
 
 

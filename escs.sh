@@ -22,7 +22,7 @@ git checkout *
 # install, easyhtmlparser, ehp.
 cd ~/projects/ehp-code
 sudo bash -i
-python setup.py install
+python2 setup.py install
 rm -fr build
 exit
 ##############################################################################
@@ -37,4 +37,5 @@ description-file = README.md
 vy setup.cfg
 python setup.py sdist register upload
 rm -fr sdist
+
 
