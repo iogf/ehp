@@ -8,7 +8,7 @@ documentation to do simple stuff. EHP handles broken html nicely.
 EHP has a short learning curve, you can go through some examples, in a few minutes
 you can implement cool stuff.
 
-**remove_items.py**
+### Create/Delete elements
 
 ~~~python
 from ehp import *
@@ -34,17 +34,17 @@ print dom
 <body >  </body>
 ~~~
 
-**insert_after.py**
+### Manipulate attributes
 
 ~~~python
 from ehp import *
-data = '''<html><body><em> alpha </em></body></html>'''
-dom = Html().feed(data)
-x = Tag('em')
-x.append(Data('beta'))
 
-for root, ind in dom.find_with_root('em'):
-    root.insert_after(ind, x)
+data = '''<html><body> <p> It is simple.</p> </body></html>'''
+
+dom = Html().feed(data)
+
+for ind, name, attr in dom.walk():
+    attr['size']  = '+2'
 
 print dom
 ~~~
@@ -52,7 +52,7 @@ print dom
 **Output:**
 
 ~~~
-<html ><body ><em > alpha </em><em >beta</em></body></html>
+<html size="+2" ><body size="+2" > <p size="+2" > It is simple.</p> </body></html>
 ~~~
 
 Install
