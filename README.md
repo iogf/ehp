@@ -1,5 +1,4 @@
-ehp
-===
+# Ehp
 
 Easy Html Parser is an AST generator for html/xml documents. EHP is a nice tool to parse html content.  
 It has a short learning curve compared to other parsers. You don't need to lose time going through massive 
