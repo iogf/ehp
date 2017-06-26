@@ -27,8 +27,6 @@ for root, item in dom.find_with_root('em'):
 print dom
 ~~~
 
-**Output:**
-
 ~~~
 
 <body >  </body>
@@ -48,8 +46,6 @@ for ind, name, attr in dom.walk():
 
 print dom
 ~~~
-
-**Output:**
 
 ~~~
 <html size="+2" ><body size="+2" > <p size="+2" > It is simple.</p> </body></html>
