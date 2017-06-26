@@ -37,5 +37,11 @@ description-file = README.md
 vy setup.cfg
 python setup.py sdist register upload
 rm -fr sdist
-
+##############################################################################
+# merge development into master.
+cd /home/tau/projects/ehp-code/
+git checkout master
+git merge development
+git push
+git checkout development
 
