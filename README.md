@@ -56,9 +56,7 @@ Install
     
 That is all.
 
-# Documentation
-
-[Wiki](https://github.com/iogf/ehp/wiki)
+**Note:** The module is quite well documented, you can find documentation there.
 
 
 
