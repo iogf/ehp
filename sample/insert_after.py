@@ -7,7 +7,7 @@ x.append(Data('beta'))
 for root, ind in dom.find_with_root('em'):
     root.insert_after(ind, x)
 
-print dom
+print(dom)
 
 
 

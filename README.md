@@ -23,7 +23,7 @@ dom = html.feed(data)
 for root, item in dom.find_with_root('em'):
     root.remove(item)
 
-print dom
+print(dom)
 ~~~
 
 ~~~
@@ -43,7 +43,7 @@ dom = Html().feed(data)
 for ind, name, attr in dom.walk():
     attr['size']  = '+2'
 
-print dom
+print(dom)
 ~~~
 
 ~~~
@@ -52,11 +52,15 @@ print dom
 
 Install
 =======
-    pip2 setup.py install
-    
-That is all.
 
+**Note:** Ehp works on python3 only, python2 support is no longer available.
+
+~~~
+pip setup.py install
+~~~
+    
 **Note:** The module is quite well documented, you can find documentation there.
+
 
 
 

@@ -8,6 +8,6 @@ for root, ind in dom.match_with_root(('style', 'color:black')):
     del ind.attr['style']
 
 
-print dom
+print(dom)
 
 

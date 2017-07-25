@@ -10,10 +10,10 @@ This is a paragraph.
 
 dom = html.feed(data)
 
-print "The entire dom:"
-print dom
-print "The text in the dom:"
-print dom.text()
+print("The entire dom:")
+print(dom)
+print("The text in the dom:")
+print(dom.text())
 
 
 

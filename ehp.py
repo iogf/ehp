@@ -1,4 +1,4 @@
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 from collections import deque
 
 version = '1.3'
@@ -39,7 +39,7 @@ class Attribute(dict):
         """
 
         data = ''
-        for key, value in self.items():
+        for key, value in list(self.items()):
             pair = '%s="%s" ' % (key, value)
             data = data + pair
 
@@ -279,7 +279,7 @@ class Root(list):
         seq = self.match(*args)
         
         try:
-            item = seq.next()
+            item = next(seq)
         except StopIteration:
             return None
         else:
@@ -293,7 +293,7 @@ class Root(list):
         seq = self.match_with_root(*args)
         
         try:
-            item = seq.next()
+            item = next(seq)
         except StopIteration:
             return None
         else:
@@ -465,7 +465,7 @@ class Root(list):
         seq = self.find(name, *args)
 
         try:
-            item = seq.next()
+            item = next(seq)
         except StopIteration:
             return None
         else:
@@ -503,7 +503,7 @@ class Root(list):
         seq = self.find_with_root(name, *args)
 
         try:
-            item = seq.next()
+            item = next(seq)
         except StopIteration:
             return None
         else:
@@ -977,7 +977,7 @@ class Tree(object):
             count = 0
 
         # It pops all the items which do not match with the closing tag.
-        for i in xrange(0, count):
+        for i in range(0, count):
             self.stack.pop()
 
 

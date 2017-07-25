@@ -10,6 +10,6 @@ font.append(Data('Data inserted!'))
 for ind in dom.find('em'):
     ind.append(font)
 
-print dom
+print(dom)
 
 

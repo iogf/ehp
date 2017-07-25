@@ -11,4 +11,4 @@ dom = html.feed(data)
 for root, item in dom.find_with_root('em'):
     root.remove(item)
 
-print dom
+print(dom)
