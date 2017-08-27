@@ -56,10 +56,11 @@ Install
 **Note:** Ehp works on python3 only, python2 support is no longer available.
 
 ~~~
-pip setup.py install
+pip ehp install
 ~~~
     
 **Note:** The module is quite well documented, you can find documentation there.
+
 
 
 
