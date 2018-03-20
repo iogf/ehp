@@ -259,7 +259,7 @@ class Root(list):
         None
         """
     
-        return self.take('id', id)
+        return self.take(('id', id))
 
     def take(self, *args):
         """
