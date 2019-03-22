@@ -101,7 +101,7 @@ class Root(list):
         dom = html.feed(data)
 
         for ind in dom.sail():
-            print type(ind),',', ind.name
+            print(type(ind),',', ind.name)
 
         It would output.
 
@@ -127,7 +127,7 @@ class Root(list):
         dom = html.feed(data)
         
         for root, ind in dom.sail_with_root():
-            print root.name, ind.name, root.index(ind)
+            print(root.name, ind.name, root.index(ind))
 
 
         It would print.
@@ -160,7 +160,7 @@ class Root(list):
             if ind.name == 'b':
                 root.remove(ind)
         
-        print dom
+        print(dom)
         
         It should print.
 
@@ -181,7 +181,7 @@ class Root(list):
         dom = html.feed(data)
 
         for ind in dom.find('b'):
-            print ind
+            print(ind)
 
         It should print.
 
@@ -195,7 +195,7 @@ class Root(list):
         dom  = html.feed(data)
         
         for ind in dom.find('p', ('style', 'color:green')):
-            print ind
+            print(ind)
         
         Output.
     
@@ -223,7 +223,7 @@ class Root(list):
         for root, ind in dom.find_with_root('p'):
             root.remove(ind)
         
-        print dom
+        print(dom)
 
         It would output.
 
@@ -250,8 +250,8 @@ class Root(list):
         html = Html()
         dom = html.feed(data)
         
-        print dom.byid('foo')
-        print dom.byid('bar')
+        print(dom.byid('foo'))
+        print(dom.byid('bar'))
 
         It should print.
 
@@ -272,8 +272,8 @@ class Root(list):
         html = Html()
         dom = html.feed(data)
         
-        print dom.take(('id', 'foo'))
-        print dom.take(('id', 'foo'), ('size', '2'))
+        print(dom.take(('id', 'foo')))
+        print(dom.take(('id', 'foo'), ('size', '2')))
         """
 
         seq = self.match(*args)
@@ -314,7 +314,7 @@ class Root(list):
         dom = html.feed(data)
         
         for ind in dom.match(('size', '1')):
-            print ind
+            print(ind)
 
         It would print.
 
@@ -347,7 +347,7 @@ class Root(list):
         item = dom.fst('body')
         item.attr['style'] = 'color:black'
         
-        print dom
+        print(dom)
 
         Output.
 
@@ -373,8 +373,8 @@ class Root(list):
         data = '<a><b> This is cool. </b><b> That is. </b></a>'
         dom = html.feed(data)
         
-        print dom.join('', 'b')
-        print type(dom.join('b'))
+        print(dom.join('', 'b'))
+        print(type(dom.join('b')))
 
         It would print.
 
@@ -387,7 +387,7 @@ class Root(list):
         data = '<a><b> alpha</b><c>beta</c> <b>gamma</a>'
         dom = html.feed(data)
         
-        print dom.join('', 'b', 'c')
+        print(dom.join('', 'b', 'c'))
 
         It would print.
 
@@ -400,7 +400,7 @@ class Root(list):
         data = '<a><b>alpha</b><c>beta</c><b>gamma</a>'
         dom = html.feed(data)
         
-        print dom.join('\n', DATA)
+        print(dom.join('\n', DATA))
 
         It would print.
 
@@ -428,7 +428,7 @@ class Root(list):
         data = '<body> <em> Cool. </em></body>'
         dom = html.feed(data)
         
-        print dom.fst('em')
+        print(dom.fst('em'))
 
         It outputs.
 
@@ -441,10 +441,10 @@ class Root(list):
         dom  = html.feed(data)
         
         for ind in dom.find('p', ('style', 'color:green')):
-            print ind
+            print(ind)
         
-        print dom.fst('p', ('style', 'color:green'))
-        print dom.fst_with_root('p', ('style', 'color:green'))
+        print(dom.fst('p', ('style', 'color:green')))
+        print(dom.fst_with_root('p', ('style', 'color:green')))
 
         Output:
 
@@ -483,7 +483,7 @@ class Root(list):
         
         root, item dom.fst_with_root('em')
         root.insert_after(item, Tag('p'))
-        print root
+        print(root)
 
         It outputs.
 
@@ -524,7 +524,7 @@ class Root(list):
         data = '<body><em>This is all the text.</em></body>'
         dom = html.feed(data)
         
-        print dom.fst('em').text()
+        print(dom.fst('em').text())
 
         It outputs.
 
@@ -573,9 +573,9 @@ class Root(list):
         dom = html.feed(data)
         
         for ind, name, attr in dom.walk():
-            print 'TAG:', ind
-            print 'NAME:', name
-            print 'ATTR:', attr
+            print('TAG:', ind)
+            print('NAME:', name)
+            print('ATTR:', attr)
 
         It should print.
 
@@ -607,7 +607,7 @@ class Root(list):
         dom = html.feed(data)
         
         for (root, name, attr), (ind, name, attr) in dom.walk_with_root():
-            print root, name, ind, name
+            print(root, name, ind, name)
 
         Output:
 
@@ -695,7 +695,7 @@ class Data(Root):
     # x holds a Data instance.
 
     type(x[0])        
-    print x[0]
+    print(x[0])
 
     Output:
 
@@ -1078,29 +1078,6 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

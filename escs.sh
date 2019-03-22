@@ -22,7 +22,7 @@ git checkout *
 # install, easyhtmlparser, ehp.
 cd ~/projects/ehp-code
 sudo bash -i
-python2 setup.py install
+python setup.py install
 rm -fr build
 exit
 ##############################################################################
@@ -44,4 +44,5 @@ git checkout master
 git merge development
 git push
 git checkout development
+
 
