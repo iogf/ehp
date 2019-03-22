@@ -995,7 +995,7 @@ class Html(HTMLParser):
         It builds a structure from a file.
         """
 
-        fd   = open(fname, 'r')
+        fd   = open(filename, 'r')
         data = fd.read()
         fd.close()
         return self.feed(data)
@@ -1078,6 +1078,7 @@ class Html(HTMLParser):
         """
 
         self.struct.mnest(data)
+
 
 
 
